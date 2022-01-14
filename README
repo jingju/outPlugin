@@ -1,0 +1,27 @@
+自定义gradle插件的实现步骤
+1、在build.gradled中应用下面两个插件
+    apply plugin: 'groovy'
+    apply plugin: 'maven'，
+2、将plugin上传到 本地marven 仓库
+   根目录执行 ./gradlew uploadArchives
+
+3、使用plugin
+ 另开一个android项目来测试
+ 在新开应用的根目录的 build.gradle文件进行如下配置，就可以用了
+ buildscript {
+     repositories {
+        //配置本地maven地址
+         maven {url uri('../repo/')
+         google()
+         mavenCentral()
+     }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.3"
+        //本地maven中插件的路径
+        classpath 'com.jing.prac:outPluginTest:0.0.1'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+ }
+

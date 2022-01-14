@@ -1,0 +1,30 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile gradleApi()
+
+    // NOTE: Do not place your application dependencies here; they belong
+    // in the individual module build.gradle files
+}
+
+
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+archivesBaseName="testplugin"
+def versionName = "0.0.1"
+group "com.jingju.plugin"
+version versionName
+uploadArchives{ //当前项目可以发布到本地文件夹中
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo')) //定义本地maven仓库的地址
+        }
+    }
+}
